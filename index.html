@@ -5,7 +5,11 @@
   <title>Key Focus</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
-
+<style type="text/css">
+  .enter-key:focus{
+    border: 1px solid red !important;
+  }
+</style>
 <body>
   <div class="container">
     <div class="row" id="treeStructure">
@@ -124,6 +128,38 @@
                <td>
                 <div class="row">
                   <div class="col-sm-12">
+                     <select class="form-control enter-key">
+                      <option>Select</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+               <td>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <select class="form-control enter-key">
+                      <option>Select</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+               <td>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <select class="form-control enter-key">
+                      <option>Select</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr class="hide">
+              <td>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control enter-key">
+                  </div>
+                   <div class="col-sm-6">
                     <input type="text" class="form-control enter-key">
                   </div>
                 </div>
@@ -131,6 +167,38 @@
                <td>
                 <div class="row">
                   <div class="col-sm-12">
+                     <select class="form-control enter-key">
+                      <option>Select</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+               <td>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <select class="form-control enter-key">
+                      <option>Select</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+               <td>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <select class="form-control enter-key">
+                      <option>Select</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control enter-key">
+                  </div>
+                   <div class="col-sm-6">
                     <input type="text" class="form-control enter-key">
                   </div>
                 </div>
@@ -138,7 +206,27 @@
                <td>
                 <div class="row">
                   <div class="col-sm-12">
-                    <input type="number" class="form-control enter-key">
+                     <select class="form-control enter-key">
+                      <option>Select</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+               <td>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <select class="form-control enter-key">
+                      <option>Select</option>
+                    </select>
+                  </div>
+                </div>
+              </td>
+               <td>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <select class="form-control enter-key">
+                      <option>Select</option>
+                    </select>
                   </div>
                 </div>
               </td>
@@ -171,18 +259,24 @@
         $(".enter-key").on("keydown", function(e){
           if(e.keyCode == Key["LEFT"]){
             if(moveToNextField(this, "left")){
-              $(this).closest("td").prev().find("input.enter-key").focus();
+              $(this).closest("td").prev().find(".enter-key").focus();
             }
           }else if(e.keyCode == Key["RIGHT"]){
             if(moveToNextField(this, "right")){
-              $(this).closest("td").next().find("input.enter-key").focus();
+              $(this).closest("td").next().find(".enter-key").focus();
             }
           }else if(e.keyCode == Key["UP"]){
-            var tdIndex = $(this).closest("td").index();
-            $(this).closest("tr").prev().find("td:nth-child("+(tdIndex+1)+") input.enter-key").focus();
+            var tdIndex = $(this).closest("td").index(), tdCol = $(this).closest("tr").find("td:nth-child("+(tdIndex+1)+") .enter-key").get(), inputIndex = 0;
+            if(tdCol.length > 1){
+              inputIndex = tdCol.indexOf(this);
+            }
+            $($(this).closest("tr").prevAll("tr:not('.hide')").first().find("td:nth-child("+(tdIndex+1)+") .enter-key")[inputIndex]).focus();
           }else if(e.keyCode == Key["DOWN"]){
-            var tdIndex = $(this).closest("td").index();
-            $(this).closest("tr").next().find("td:nth-child("+(tdIndex+1)+") input.enter-key").focus();
+            var tdIndex = $(this).closest("td").index(), tdCol = $(this).closest("tr").find("td:nth-child("+(tdIndex+1)+") .enter-key").get(), inputIndex = 0;
+            if(tdCol.length > 1){
+              inputIndex = tdCol.indexOf(this);
+            }
+            $($(this).closest("tr").nextAll("tr:not('.hide')").first().find("td:nth-child("+(tdIndex+1)+") .enter-key")[inputIndex]).focus();
           }
         })
       }
