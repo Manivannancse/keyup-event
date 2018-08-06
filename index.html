@@ -261,30 +261,36 @@
         }
         return ( curntEle.length -1 ) == tdindex;
       }
-
+      function checkField(inputField){
+        if(inputField.hasClass("select2-container")){
+          inputField.select2("focus")
+        }else{
+          inputField.focus();
+        }
+      }
       function init(){
         $(".enter-key").on("keydown", function(e){
           if(e.keyCode == Key["LEFT"]){
             if(moveToNextField(this, "left")){
-              $(this).closest("td").prev().find(".enter-key").focus();
+              checkField($(this).closest("td").prev().find(".enter-key"));
             }
           }else if(e.keyCode == Key["RIGHT"]){
             if(moveToNextField(this, "right")){
-              // debugger;
-              $(this).closest("td").next().find(".enter-key:first").focus();
+              checkField($(this).closest("td").next().find(".enter-key"));
             }
           }else if(e.keyCode == Key["UP"]){
             var tdIndex = $(this).closest("td").index(), tdCol = $(this).closest("tr").find("td:nth-child("+(tdIndex+1)+") .enter-key").get(), inputIndex = 0;
             if(tdCol.length > 1){
               inputIndex = tdCol.indexOf(this);
             }
-            $($(this).closest("tr").prevAll("tr:not('.hide')").first().find("td:nth-child("+(tdIndex+1)+") .enter-key")[inputIndex]).focus();
+            // $($(this).closest("tr").prevAll("tr:not('.hide')").first().find("td:nth-child("+(tdIndex+1)+") .enter-key")[inputIndex]).focus();
+            checkField($($(this).closest("tr").prevAll("tr:not('.hide')").first().find("td:nth-child("+(tdIndex+1)+") .enter-key")[inputIndex]));
           }else if(e.keyCode == Key["DOWN"]){
             var tdIndex = $(this).closest("td").index(), tdCol = $(this).closest("tr").find("td:nth-child("+(tdIndex+1)+") .enter-key").get(), inputIndex = 0;
             if(tdCol.length > 1){
               inputIndex = tdCol.indexOf(this);
             }
-            $($(this).closest("tr").nextAll("tr:not('.hide')").first().find("td:nth-child("+(tdIndex+1)+") .enter-key")[inputIndex]).focus();
+            checkField($($(this).closest("tr").nextAll("tr:not('.hide')").first().find("td:nth-child("+(tdIndex+1)+") .enter-key")[inputIndex]));
           }
         })
       }
