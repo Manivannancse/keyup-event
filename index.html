@@ -4,10 +4,15 @@
 <head>
   <title>Key Focus</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/select2.css">
 </head>
 <style type="text/css">
-  .enter-key:focus{
+  .enter-key:focus, .select2-container-active{
     border: 1px solid red !important;
+    border-radius:5px;
+  }
+  .select2-container{
+  	width: 100%;
   }
 </style>
 <body>
@@ -128,7 +133,7 @@
                <td>
                 <div class="row">
                   <div class="col-sm-12">
-                     <select class="form-control enter-key">
+                     <select class="enter-key">
                       <option>Select</option>
                     </select>
                   </div>
@@ -137,7 +142,7 @@
                <td>
                 <div class="row">
                   <div class="col-sm-12">
-                    <select class="form-control enter-key">
+                    <select class="enter-key">
                       <option>Select</option>
                     </select>
                   </div>
@@ -146,7 +151,7 @@
                <td>
                 <div class="row">
                   <div class="col-sm-12">
-                    <select class="form-control enter-key">
+                    <select class="enter-key">
                       <option>Select</option>
                     </select>
                   </div>
@@ -167,7 +172,7 @@
                <td>
                 <div class="row">
                   <div class="col-sm-12">
-                     <select class="form-control enter-key">
+                     <select class="enter-key">
                       <option>Select</option>
                     </select>
                   </div>
@@ -176,7 +181,7 @@
                <td>
                 <div class="row">
                   <div class="col-sm-12">
-                    <select class="form-control enter-key">
+                    <select class="enter-key">
                       <option>Select</option>
                     </select>
                   </div>
@@ -185,7 +190,7 @@
                <td>
                 <div class="row">
                   <div class="col-sm-12">
-                    <select class="form-control enter-key">
+                    <select class="enter-key">
                       <option>Select</option>
                     </select>
                   </div>
@@ -206,7 +211,7 @@
                <td>
                 <div class="row">
                   <div class="col-sm-12">
-                     <select class="form-control enter-key">
+                     <select class="enter-key">
                       <option>Select</option>
                     </select>
                   </div>
@@ -215,7 +220,7 @@
                <td>
                 <div class="row">
                   <div class="col-sm-12">
-                    <select class="form-control enter-key">
+                    <select class="enter-key">
                       <option>Select</option>
                     </select>
                   </div>
@@ -224,7 +229,7 @@
                <td>
                 <div class="row">
                   <div class="col-sm-12">
-                    <select class="form-control enter-key">
+                    <select class="enter-key">
                       <option>Select</option>
                     </select>
                   </div>
@@ -237,7 +242,9 @@
     </div>
   </div>
   <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+  <script type="text/javascript" src="js/select2.js"></script>
   <script type="text/javascript">
+  	$("select.enter-key").select2();
     var keypressEvent = (function(){
       var Key = {
         LEFT: 37,
@@ -263,7 +270,8 @@
             }
           }else if(e.keyCode == Key["RIGHT"]){
             if(moveToNextField(this, "right")){
-              $(this).closest("td").next().find(".enter-key").focus();
+              // debugger;
+              $(this).closest("td").next().find(".enter-key:first").focus();
             }
           }else if(e.keyCode == Key["UP"]){
             var tdIndex = $(this).closest("td").index(), tdCol = $(this).closest("tr").find("td:nth-child("+(tdIndex+1)+") .enter-key").get(), inputIndex = 0;
